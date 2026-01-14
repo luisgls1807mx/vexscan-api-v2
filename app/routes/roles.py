@@ -1,9 +1,5 @@
-"""
-VexScan API - Roles & Permissions Routes
-Role-based access control management
-"""
-
-from fastapi import APIRouter, Depends, Query
+from fastapi import APIRouter, Depends, Query, HTTPException
+from typing import Optional
 
 from app.core.auth import get_current_user, get_org_admin, CurrentUser
 from app.core.exceptions import NotFoundError, RPCError, ValidationError
@@ -48,22 +44,49 @@ async def list_permissions(
 
 @router.get("")
 async def list_roles(
-    workspace_id: str,
+    workspace_id: Optional[str] = Query(None, description="Workspace ID (mutually exclusive with organization_id)"),
+    organization_id: Optional[str] = Query(None, description="Organization ID (mutually exclusive with workspace_id)"),
     include_system: bool = Query(True, description="Include system roles"),
     user: CurrentUser = Depends(get_current_user)
 ):
     """
-    List roles for a workspace.
+    List roles for a workspace or organization.
+    
+    Must provide exactly ONE of:
+    - workspace_id: List roles for specific workspace
+    - organization_id: List roles for organization's default workspace
     
     Returns:
     - System roles (Admin, Analyst, Viewer)
     - Custom roles created for the workspace
     """
+    # Validate exactly one parameter is provided
+    if workspace_id and organization_id:
+        raise HTTPException(
+            status_code=400,
+            detail={
+                "success": False,
+                "error": "Debe pasar solo workspace_id O organization_id, no ambos",
+                "error_code": "INVALID_PARAMS"
+            }
+        )
+    
+    if not workspace_id and not organization_id:
+        raise HTTPException(
+            status_code=400,
+            detail={
+                "success": False,
+                "error": "Debe pasar workspace_id o organization_id",
+                "error_code": "MISSING_PARAMS"
+            }
+        )
+    
     try:
         roles = await RolesService.list_roles(
             user.access_token,
-            workspace_id,
-            include_system
+            workspace_id=workspace_id,
+            organization_id=organization_id,
+            include_system=include_system
         )
         return {"success": True, "data": roles}
     except Exception as e:
@@ -72,25 +95,52 @@ async def list_roles(
 
 @router.post("", response_model=RoleResponse)
 async def create_role(
-    workspace_id: str,
     request: RoleCreate,
+    workspace_id: Optional[str] = Query(None, description="Workspace ID (mutually exclusive with organization_id)"),
+    organization_id: Optional[str] = Query(None, description="Organization ID (mutually exclusive with workspace_id)"),
     user: CurrentUser = Depends(get_org_admin)
 ):
     """
     Create a custom role (Org Admin only).
     
+    Must provide exactly ONE of:
+    - workspace_id: SuperAdmin puede especificar workspace exacto
+    - organization_id: OrgAdmin crea roles en su organización
+    
     Permissions must be valid permission codes from fn_list_permissions.
     """
+    # Validate exactly one parameter is provided
+    if workspace_id and organization_id:
+        raise HTTPException(
+            status_code=400,
+            detail={
+                "success": False,
+                "error": "Debe pasar solo workspace_id O organization_id, no ambos",
+                "error_code": "INVALID_PARAMS"
+            }
+        )
+    
+    if not workspace_id and not organization_id:
+        raise HTTPException(
+            status_code=400,
+            detail={
+                "success": False,
+                "error": "Debe pasar workspace_id o organization_id",
+                "error_code": "MISSING_PARAMS"
+            }
+        )
+    
     if not request.permissions:
         raise ValidationError("At least one permission is required")
     
     try:
         role = await RolesService.create_role(
             user.access_token,
-            workspace_id,
-            request.name,
-            request.permissions,
-            request.description
+            name=request.name,
+            permissions=request.permissions,
+            workspace_id=workspace_id,
+            organization_id=organization_id,
+            description=request.description
         )
         return role
     except Exception as e:

@@ -25,10 +25,14 @@ class RoleUpdate(BaseModel):
 class RoleResponse(BaseModel):
     """Role response with permissions."""
     id: str
-    workspace_id: str
+    workspace_id: Optional[str] = None
+    organization_id: Optional[str] = None
     name: str
     description: Optional[str] = None
-    is_system: bool
-    permissions: List[Dict[str, Any]] = []
-    users_count: int = 0
-    created_at: datetime
+    is_system: bool = False
+    permissions: Optional[Any] = None  # Can be list (fn_list_roles) or dict (fn_get_role)
+    permissions_count: Optional[int] = None
+    users_count: Optional[int] = 0
+    users: Optional[List[Dict[str, Any]]] = None
+    created_at: Optional[datetime] = None
+

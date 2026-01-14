@@ -14,34 +14,69 @@ class RolesService:
     @staticmethod
     async def list_permissions(access_token: str) -> List[Dict[str, Any]]:
         """List all available permissions."""
+        import json
         result = await anyio.to_thread.run_sync(
             lambda: supabase.rpc_with_token('fn_list_permissions', access_token, {})
         )
-        return result or []
+        
+        # Handle case where result is a JSON string
+        if isinstance(result, str):
+            try:
+                result = json.loads(result)
+            except json.JSONDecodeError:
+                return []
+        
+        # If result is a dict (grouped by category), flatten to list
+        if isinstance(result, dict):
+            flat_list = []
+            for category, perms in result.items():
+                if isinstance(perms, list):
+                    for perm in perms:
+                        if isinstance(perm, dict):
+                            perm['category'] = category
+                            # Normalize 'key' to 'code' for consistency
+                            if 'key' in perm and 'code' not in perm:
+                                perm['code'] = perm['key']
+                            flat_list.append(perm)
+            return flat_list
+        
+        return result if isinstance(result, list) else []
     
     @staticmethod
     async def group_permissions(permissions: List[Dict[str, Any]]) -> Dict[str, List[Dict[str, Any]]]:
         """Group permissions by category."""
         grouped = {}
         for perm in permissions:
-            category = perm.get('code', '').split('.')[0]
-            if category not in grouped:
-                grouped[category] = []
-            grouped[category].append(perm)
+            if isinstance(perm, dict):
+                # Use 'category' if available, otherwise extract from 'code' or 'key'
+                category = perm.get('category') or perm.get('code', perm.get('key', '')).split('.')[0]
+                if category:
+                    if category not in grouped:
+                        grouped[category] = []
+                    grouped[category].append(perm)
         return grouped
     
     @staticmethod
     async def list_roles(
         access_token: str,
-        workspace_id: str,
+        workspace_id: Optional[str] = None,
+        organization_id: Optional[str] = None,
         include_system: bool = True
     ) -> List[Dict[str, Any]]:
-        """List roles for a workspace."""
+        """
+        List roles for a workspace or organization.
+        
+        Must provide exactly one of workspace_id or organization_id, not both.
+        """
         result = await anyio.to_thread.run_sync(
             lambda: supabase.rpc_with_token(
                 'fn_list_roles',
                 access_token,
-                {'p_workspace_id': workspace_id, 'p_include_system': include_system}
+                {
+                    'p_workspace_id': workspace_id,
+                    'p_organization_id': organization_id,
+                    'p_include_system': include_system
+                }
             )
         )
         return result or []
@@ -49,18 +84,24 @@ class RolesService:
     @staticmethod
     async def create_role(
         access_token: str,
-        workspace_id: str,
         name: str,
         permissions: List[str],
+        workspace_id: Optional[str] = None,
+        organization_id: Optional[str] = None,
         description: Optional[str] = None
     ) -> Dict[str, Any]:
-        """Create a custom role."""
+        """
+        Create a custom role.
+        
+        Must provide exactly one of workspace_id or organization_id, not both.
+        """
         result = await anyio.to_thread.run_sync(
             lambda: supabase.rpc_with_token(
                 'fn_create_role',
                 access_token,
                 {
                     'p_workspace_id': workspace_id,
+                    'p_organization_id': organization_id,
                     'p_name': name,
                     'p_description': description,
                     'p_permissions': permissions
