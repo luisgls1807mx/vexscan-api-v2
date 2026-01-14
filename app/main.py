@@ -59,8 +59,8 @@ app = FastAPI(
     ## Workspace Context
     Set `X-Workspace-ID` header for workspace-scoped operations.
     """,
-    docs_url="/docs" if settings.DEBUG else None,
-    redoc_url="/redoc" if settings.DEBUG else None,
+    docs_url="/docs",
+    redoc_url="/redoc",
     lifespan=lifespan
 )
 
