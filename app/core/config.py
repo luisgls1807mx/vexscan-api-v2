@@ -24,6 +24,12 @@ class Settings(BaseSettings):
     SUPABASE_URL: str
     SUPABASE_ANON_KEY: str
     SUPABASE_SERVICE_ROLE_KEY: str
+    # PostgreSQL Direct Connection
+    user: str
+    password: str
+    host: str
+    port: int
+    dbname: str
     
     # JWT (Supabase uses its own JWT)
     JWT_SECRET: Optional[str] = None  # Optional: for custom JWT validation
@@ -41,6 +47,19 @@ class Settings(BaseSettings):
     # Rate Limiting
     RATE_LIMIT_REQUESTS: int = 100
     RATE_LIMIT_WINDOW: int = 60  # seconds
+    
+    # AI Providers - Set ONE of these based on your chosen provider
+    OPENAI_API_KEY: Optional[str] = None
+    ANTHROPIC_API_KEY: Optional[str] = None
+    GOOGLE_API_KEY: Optional[str] = None
+    
+    @property
+    def AI_API_KEY(self) -> Optional[str]:
+        """
+        Get the configured AI API key.
+        Priority: OpenAI > Anthropic > Google
+        """
+        return self.OPENAI_API_KEY or self.ANTHROPIC_API_KEY or self.GOOGLE_API_KEY
     
     class Config:
         env_file = ".env"

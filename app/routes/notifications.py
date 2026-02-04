@@ -45,8 +45,8 @@ async def list_notifications(
     page: int = Query(1, ge=1),
     per_page: int = Query(20, ge=1, le=100),
     is_read: Optional[bool] = None,
-    category: Optional[str] = Query(None, regex="^(finding|team|scan|system)$"),
-    priority: Optional[str] = Query(None, regex="^(critical|high|medium|low)$"),
+    category: Optional[str] = Query(None, pattern="^(finding|team|scan|system)$"),
+    priority: Optional[str] = Query(None, pattern="^(critical|high|medium|low)$"),
     user: CurrentUser = Depends(get_current_user)
 ):
     """
@@ -229,7 +229,7 @@ async def update_notification_preferences(
 
 @router.post("/test")
 async def send_test_notification(
-    channel: str = Query("in_app", regex="^(in_app|email|webhook)$"),
+    channel: str = Query("in_app", pattern="^(in_app|email|webhook)$"),
     user: CurrentUser = Depends(get_current_user)
 ):
     """

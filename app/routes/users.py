@@ -34,7 +34,7 @@ async def list_organization_members(
     page: int = Query(1, ge=1),
     per_page: int = Query(50, ge=1, le=100),
     search: Optional[str] = None,
-    role: Optional[str] = Query(None, regex="^(org_admin|org_member)$"),
+    role: Optional[str] = Query(None, pattern="^(org_admin|org_member)$"),
     is_active: Optional[bool] = None,
     user: CurrentUser = Depends(get_current_user)
 ):

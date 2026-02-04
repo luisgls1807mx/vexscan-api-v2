@@ -13,6 +13,7 @@ import time
 
 from app.core.config import settings
 from app.core.exceptions import VexScanException
+from app.core.postgres import get_postgres_client, cleanup_postgres
 from app.routes import api_router
 
 # Configure logging
@@ -31,10 +32,20 @@ async def lifespan(app: FastAPI):
     logger.info(f"Environment: {settings.ENVIRONMENT}")
     logger.info(f"Debug mode: {settings.DEBUG}")
     
+    # Inicializar conexión directa a PostgreSQL
+    try:
+        postgres_client = get_postgres_client()
+        await postgres_client.connect()
+        logger.info("PostgreSQL direct connection initialized")
+    except Exception as e:
+        logger.warning(f"Failed to initialize PostgreSQL connection: {e}")
+    
     yield
     
     # Shutdown
     logger.info("Shutting down...")
+    await cleanup_postgres()
+    logger.info("PostgreSQL connection closed")
 
 
 # Create FastAPI app

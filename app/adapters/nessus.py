@@ -523,33 +523,25 @@ class NessusAdapter(BaseScannerAdapter):
         
         return None
     
-    def _generate_fingerprint(
-        self, 
-        finding: RawFinding, 
-        asset: RawAsset
-    ) -> str:
+    def _generate_fingerprint(self, finding: RawFinding, asset: RawAsset) -> str:
         """
-        Generate a deterministic fingerprint for deduplication.
+        Fingerprint simplificado para deduplicación confiable.
         
-        Components:
-        - Asset identifier (IP/hostname)
-        - Plugin ID
-        - Port/Protocol (if applicable)
-        - CVEs (sorted)
+        Componentes:
+        - Asset identifier (IP/hostname) 
+        - Plugin ID (identifica la vulnerabilidad)
+        - Port/Protocol (ubicación exacta)
+        
+        NO incluir CVEs porque pueden variar entre versiones del plugin.
         """
         components = [
             asset.identifier.lower(),
-            finding.plugin_id or finding.title,
+            finding.plugin_id or finding.scanner_finding_id or finding.title,
         ]
         
-        # Add port/protocol if present
-        if finding.port:
+        # Solo agregar puerto si es > 0
+        if finding.port and finding.port > 0:
             components.append(f"{finding.port}/{finding.protocol or 'tcp'}")
-        
-        # Add sorted CVEs if present
-        if finding.cves:
-            sorted_cves = sorted(finding.cves)
-            components.append(",".join(sorted_cves))
         
         fingerprint_str = "|".join(str(c) for c in components)
         return hashlib.sha256(fingerprint_str.encode()).hexdigest()[:32]

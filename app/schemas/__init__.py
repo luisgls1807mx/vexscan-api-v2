@@ -97,6 +97,8 @@ from .scans import (
     ScanImportCreate,
     ScanImportResponse,
     ScanDiffResponse,
+    ScanDiffSummary,
+    ScanDiffFindings,
 )
 
 # Evidence
@@ -180,6 +182,8 @@ __all__ = [
     "ScanImportCreate",
     "ScanImportResponse",
     "ScanDiffResponse",
+    "ScanDiffSummary",
+    "ScanDiffFindings",
     # Evidence
     "EvidenceCreate",
     "EvidenceResponse",

@@ -15,10 +15,60 @@ from app.services.import_service import import_service
 from app.schemas import (
     ScanImportResponse,
     ScanDiffResponse,
-    PaginatedResponse
+    PaginatedResponse,
+    ScanDiffSummary,
+    ScanDiffFindings
 )
 
 router = APIRouter(prefix="/scans", tags=["Scans"])
+
+
+@router.post("/test-assets")
+async def test_extract_assets(
+    file: UploadFile = File(...)
+):
+    """
+    ENDPOINT DE PRUEBA: Extrae y retorna solo los assets del archivo Nessus.
+    No hace ningún procesamiento en Supabase.
+    No requiere autenticación.
+    
+    Retorna:
+    - total_assets: Número total de assets encontrados
+    - assets: Lista de assets con sus propiedades
+    """
+    from app.adapters.nessus import NessusAdapter
+    
+    # Leer el contenido del archivo
+    content = await file.read()
+    filename = file.filename or "test.nessus"
+    
+    # Parsear con el adapter de Nessus
+    adapter = NessusAdapter()
+    scan_result = await adapter.parse(content, filename)
+    
+    # Extraer assets del ScanResult
+    assets = [
+        {
+            "ip_address": asset.ip_address,
+            "hostname": asset.hostname,
+            "mac_address": asset.mac_address,
+            "os_name": asset.os_name,
+            "os_family": asset.os_family,
+            "asset_type": asset.asset_type.value if asset.asset_type else None,
+            "network_zone": asset.network_zone.value if asset.network_zone else None,
+            "metadata": asset.metadata
+        }
+        for asset in scan_result.assets
+    ]
+    
+    return {
+        "success": True,
+        "total_assets": len(assets),
+        "total_findings": scan_result.total_findings,
+        "total_hosts": scan_result.total_hosts,
+        "assets": assets,
+        "sample_asset": assets[0] if assets else None
+    }
 
 
 @router.post("/upload")
@@ -26,7 +76,6 @@ async def upload_scan(
     file: UploadFile = File(...),
     project_id: Optional[str] = Form(None),
     network_zone: str = Form("internal"),
-    force_upload: bool = Form(False, description="Force upload even if file already exists"),
     user: CurrentUser = Depends(require_permission("imports.create"))
 ):
     """
@@ -73,8 +122,7 @@ async def upload_scan(
         file_content=content,
         filename=filename,
         project_id=project_id,
-        network_zone=network_zone,
-        force_upload=force_upload
+        network_zone=network_zone
     )
     
     return {
@@ -122,6 +170,43 @@ async def get_scan_diff(
     result = await import_service.get_scan_diff(
         user.access_token,
         scan_id
+    )
+    return result
+
+
+@router.get("/{scan_id}/diff/summary", response_model=ScanDiffSummary)
+async def get_scan_diff_summary(
+    scan_id: str,
+    user: CurrentUser = Depends(require_permission("imports.read"))
+):
+    """
+    Get ONLY the scan diff stats (lazy loading).
+    Much faster than full diff.
+    """
+    result = await import_service.get_scan_diff_summary(
+        user.access_token,
+        scan_id
+    )
+    return result
+
+
+@router.get("/{scan_id}/diff/findings", response_model=ScanDiffFindings)
+async def get_scan_diff_findings(
+    scan_id: str,
+    diff_type: str = Query(..., regex="^(new|resolved|persistent|reopened)$"),
+    page: int = Query(1, ge=1),
+    per_page: int = Query(20, ge=1, le=100),
+    user: CurrentUser = Depends(require_permission("imports.read"))
+):
+    """
+    Get paginated findings for a specific diff category.
+    """
+    result = await import_service.get_scan_diff_findings(
+        user.access_token,
+        scan_id,
+        diff_type,
+        page,
+        per_page
     )
     return result
 

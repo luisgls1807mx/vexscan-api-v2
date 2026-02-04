@@ -49,3 +49,20 @@ class ScanDiffResponse(BaseModel):
     
     summary: Optional[Dict[str, int]] = {}
 
+
+class ScanDiffSummary(BaseModel):
+    """Scan diff summary only (lazy loading)."""
+    scan_id: str
+    previous_scan_id: Optional[str] = None
+    summary: Dict[str, int] = {
+        "new": 0,
+        "resolved": 0,
+        "persistent": 0,
+        "reopened": 0
+    }
+
+
+class ScanDiffFindings(BaseModel):
+    """Paginated findings for a specific diff type."""
+    data: List[Dict[str, Any]]
+    pagination: Dict[str, Any]

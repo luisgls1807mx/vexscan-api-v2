@@ -9,7 +9,7 @@ from typing import Optional
 from app.core.auth import get_current_user, require_permission, CurrentUser
 from app.core.config import settings
 from app.core.exceptions import ValidationError
-from app.services.import_service_optimized import import_service_optimized
+from app.services.import_service import import_service
 
 router = APIRouter(prefix="/scans-experimental", tags=["Scans Experimental"])
 
@@ -68,7 +68,7 @@ async def upload_scan_v1_batch_service_role(
         )
     
     # Process using optimized approach 1
-    result = await import_service_optimized.process_scan_v1_batch_service_role(
+    result = await import_service.process_scan_v1_batch_service_role(
         access_token=user.access_token,
         workspace_id=user.workspace_id,
         file_content=content,
@@ -141,7 +141,7 @@ async def upload_scan_v2_async_queue(
         )
     
     # Process using optimized approach 2 (returns immediately)
-    result = await import_service_optimized.process_scan_v2_async_queue(
+    result = await import_service.process_scan_v2_async_queue(
         access_token=user.access_token,
         workspace_id=user.workspace_id,
         file_content=content,
@@ -174,7 +174,7 @@ async def get_job_status(
     - `processed`: Job completed successfully
     - `failed`: Job failed (check `error_message`)
     """
-    result = await import_service_optimized.get_job_status(job_id)
+    result = await import_service.get_job_status(job_id)
     return {"success": True, "data": result}
 
 
@@ -234,7 +234,7 @@ async def upload_scan_v3_bulk_rpc(
         )
     
     # Process using optimized approach 3 (bulk RPC)
-    result = await import_service_optimized.process_scan_v3_bulk_rpc(
+    result = await import_service.process_scan_v3_bulk_rpc(
         access_token=user.access_token,
         workspace_id=user.workspace_id,
         file_content=content,

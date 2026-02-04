@@ -20,6 +20,8 @@ from app.routes.scans_experimental import router as scans_experimental_router
 from app.routes.evidence import router as evidence_router
 from app.routes.notifications import router as notifications_router
 from app.routes.dashboard import router as dashboard_router
+from app.routes.ai_chat import router as ai_chat_router
+from app.routes.translations import router as translations_router
 
 # Main router
 api_router = APIRouter()
@@ -39,5 +41,7 @@ api_router.include_router(scans_experimental_router)
 api_router.include_router(evidence_router)
 api_router.include_router(notifications_router)
 api_router.include_router(dashboard_router)
+api_router.include_router(ai_chat_router)
+api_router.include_router(translations_router)
 
 __all__ = ["api_router"]

@@ -36,7 +36,7 @@ async def list_findings(
     project_id: str,
     page: int = Query(1, ge=1),
     per_page: int = Query(50, ge=1, le=200),
-    severity: Optional[str] = Query(None, regex="^(Critical|High|Medium|Low|Info)$"),
+    severity: Optional[str] = Query(None, pattern="^(Critical|High|Medium|Low|Info)$"),
     status: Optional[str] = None,
     search: Optional[str] = None,
     hostname: Optional[str] = None,
@@ -44,10 +44,10 @@ async def list_findings(
     port: Optional[int] = None,
     assigned_to_me: Optional[bool] = None,
     assigned_to_team: Optional[str] = None,
-    diff_type: Optional[str] = Query(None, regex="^(new|resolved|persistent|reopened)$"),
+    diff_type: Optional[str] = Query(None, pattern="^(new|resolved|persistent|reopened)$"),
     scan_id: Optional[str] = None,
-    sort_by: str = Query("severity", regex="^(severity|first_seen|last_activity_at|folio)$"),
-    sort_order: str = Query("desc", regex="^(asc|desc)$"),
+    sort_by: str = Query("severity", pattern="^(severity|first_seen|last_activity_at|folio)$"),
+    sort_order: str = Query("desc", pattern="^(asc|desc)$"),
     user: CurrentUser = Depends(require_permission("findings.read"))
 ):
     """

@@ -58,6 +58,7 @@ class AssetBulkTagRequest(BaseModel):
 async def list_assets(
     workspace_id: Optional[str] = None,
     project_id: Optional[str] = None,
+    scan_import_id: Optional[str] = None,
     page: int = Query(1, ge=1),
     per_page: int = Query(50, ge=1, le=200),
     search: Optional[str] = None,
@@ -67,8 +68,8 @@ async def list_assets(
     criticality: Optional[str] = None,
     has_findings: Optional[bool] = None,
     is_manual: Optional[bool] = None,
-    sort_by: str = Query("last_seen", regex="^(identifier|last_seen|findings_count)$"),
-    sort_order: str = Query("desc", regex="^(asc|desc)$"),
+    sort_by: str = Query("last_seen", pattern="^(identifier|last_seen|findings_count)$"),
+    sort_order: str = Query("desc", pattern="^(asc|desc)$"),
     user: CurrentUser = Depends(get_current_user)
 ):
     """
@@ -76,6 +77,7 @@ async def list_assets(
     
     Filters:
     - workspace_id/project_id: Scope
+    - scan_import_id: Filter by specific scan import
     - search: Search in identifier, hostname, IP
     - asset_type: host, ip, url, app, network
     - operating_system: Filter by OS
@@ -95,6 +97,7 @@ async def list_assets(
             {
                 'p_workspace_id': ws_id,
                 'p_project_id': project_id,
+                'p_scan_import_id': scan_import_id,
                 'p_page': page,
                 'p_per_page': per_page,
                 'p_search': search,

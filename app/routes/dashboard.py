@@ -101,7 +101,7 @@ async def get_my_dashboard(
 @router.get("/trends/{organization_id}")
 async def get_trends(
     organization_id: str,
-    period: str = Query("3m", regex="^(1m|3m|6m|1y|all)$"),
+    period: str = Query("3m", pattern="^(1m|3m|6m|1y|all)$"),
     user: CurrentUser = Depends(get_current_user)
 ):
     """Get finding trends over time."""
@@ -172,8 +172,8 @@ async def get_status_breakdown(
 @router.get("/mttr/{organization_id}")
 async def get_mttr(
     organization_id: str,
-    period: str = Query("3m", regex="^(1m|3m|6m|1y|all)$"),
-    group_by: str = Query("severity", regex="^(severity|project|team|month)$"),
+    period: str = Query("3m", pattern="^(1m|3m|6m|1y|all)$"),
+    group_by: str = Query("severity", pattern="^(severity|project|team|month)$"),
     user: CurrentUser = Depends(get_current_user)
 ):
     """Get Mean Time to Remediate (MTTR) statistics."""
@@ -245,7 +245,7 @@ async def get_top_assets(
 @router.get("/top-performers/{organization_id}")
 async def get_top_performers(
     organization_id: str,
-    period: str = Query("1m", regex="^(1m|3m|6m|1y)$"),
+    period: str = Query("1m", pattern="^(1m|3m|6m|1y)$"),
     limit: int = Query(10, ge=1, le=50),
     user: CurrentUser = Depends(get_current_user)
 ):

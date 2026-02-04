@@ -24,7 +24,7 @@ async def list_projects(
     workspace_id: Optional[str] = Query(None, description="Filter by workspace"),
     page: int = Query(1, ge=1),
     per_page: int = Query(20, ge=1, le=100),
-    status: Optional[str] = Query(None, regex="^(active|archived|completed)$"),
+    status: Optional[str] = Query(None, pattern="^(active|archived|completed)$"),
     search: Optional[str] = None,
     user: CurrentUser = Depends(get_current_user)
 ):

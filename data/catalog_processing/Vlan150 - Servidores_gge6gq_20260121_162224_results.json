@@ -1,0 +1,479 @@
+{
+  "metadata": {
+    "source_file": "C:\\Users\\carlo\\Downloads\\Vlan150 - Servidores_gge6gq.nessus",
+    "parsed_at": "2026-01-21T16:22:24.796782",
+    "total_hosts": 110,
+    "total_findings": 6818,
+    "unique_vulnerabilities": 283,
+    "translated_at": "2026-01-21T16:22:24.819151",
+    "translation_model": "claude-3-haiku-20240307",
+    "total_tokens_in": 0,
+    "total_tokens_out": 0,
+    "estimated_cost_usd": 0.0
+  },
+  "processing_results": {
+    "inserted": 0,
+    "skipped": 0,
+    "errors": 283,
+    "error_details": [
+      {
+        "batch": 1,
+        "error": "{'message': \"Could not find the 'cve' column of 'vulnerabilities' in the schema cache\", 'code': 'PGRST204', 'hint': None, 'details': None}",
+        "items": [
+          "nessus_117886",
+          "nessus_66334",
+          "nessus_110723",
+          "nessus_45590",
+          "nessus_39520",
+          "nessus_124462",
+          "nessus_125265",
+          "nessus_54615",
+          "nessus_42256",
+          "nessus_209654"
+        ]
+      },
+      {
+        "batch": 2,
+        "error": "{'message': \"Could not find the 'cve' column of 'vulnerabilities' in the schema cache\", 'code': 'PGRST204', 'hint': None, 'details': None}",
+        "items": [
+          "nessus_11936",
+          "nessus_109345",
+          "nessus_10287",
+          "nessus_25220",
+          "nessus_10114",
+          "nessus_12053",
+          "nessus_181418",
+          "nessus_149334",
+          "nessus_10881",
+          "nessus_70658"
+        ]
+      },
+      {
+        "batch": 3,
+        "error": "{'message': \"Could not find the 'cve' column of 'vulnerabilities' in the schema cache\", 'code': 'PGRST204', 'hint': None, 'details': None}",
+        "items": [
+          "nessus_153588",
+          "nessus_187315",
+          "nessus_153953",
+          "nessus_70657",
+          "nessus_10267",
+          "nessus_53335",
+          "nessus_11356",
+          "nessus_10437",
+          "nessus_24260",
+          "nessus_56979"
+        ]
+      },
+      {
+        "batch": 4,
+        "error": "{'message': \"Could not find the 'cve' column of 'vulnerabilities' in the schema cache\", 'code': 'PGRST204', 'hint': None, 'details': None}",
+        "items": [
+          "nessus_109552",
+          "nessus_22964",
+          "nessus_11111",
+          "nessus_10223",
+          "nessus_142960",
+          "nessus_84502",
+          "nessus_58453",
+          "nessus_108797",
+          "nessus_46180",
+          "nessus_57582"
+        ]
+      },
+      {
+        "batch": 5,
+        "error": "{'message': \"Could not find the 'cve' column of 'vulnerabilities' in the schema cache\", 'code': 'PGRST204', 'hint': None, 'details': None}",
+        "items": [
+          "nessus_86067",
+          "nessus_51192",
+          "nessus_15901",
+          "nessus_10863",
+          "nessus_70544",
+          "nessus_20007",
+          "nessus_83875",
+          "nessus_42873",
+          "nessus_57041",
+          "nessus_78479"
+        ]
+      },
+      {
+        "batch": 6,
+        "error": "{'message': \"Could not find the 'cve' column of 'vulnerabilities' in the schema cache\", 'code': 'PGRST204', 'hint': None, 'details': None}",
+        "items": [
+          "nessus_65821",
+          "nessus_156899",
+          "nessus_104743",
+          "nessus_157288",
+          "nessus_136318",
+          "nessus_121010",
+          "nessus_21643",
+          "nessus_56984",
+          "nessus_106716",
+          "nessus_10884"
+        ]
+      },
+      {
+        "batch": 7,
+        "error": "{'message': \"Could not find the 'cve' column of 'vulnerabilities' in the schema cache\", 'code': 'PGRST204', 'hint': None, 'details': None}",
+        "items": [
+          "nessus_43815",
+          "nessus_42410",
+          "nessus_96982",
+          "nessus_100871",
+          "nessus_24786",
+          "nessus_26917",
+          "nessus_10761",
+          "nessus_33139",
+          "nessus_10107",
+          "nessus_43111"
+        ]
+      },
+      {
+        "batch": 8,
+        "error": "{'message': \"Could not find the 'cve' column of 'vulnerabilities' in the schema cache\", 'code': 'PGRST204', 'hint': None, 'details': None}",
+        "items": [
+          "nessus_11422",
+          "nessus_57608",
+          "nessus_64814",
+          "nessus_10940",
+          "nessus_10785",
+          "nessus_10150",
+          "nessus_10736",
+          "nessus_11011",
+          "nessus_18405",
+          "nessus_30218"
+        ]
+      },
+      {
+        "batch": 9,
+        "error": "{'message': \"Could not find the 'cve' column of 'vulnerabilities' in the schema cache\", 'code': 'PGRST204', 'hint': None, 'details': None}",
+        "items": [
+          "nessus_57690",
+          "nessus_136929",
+          "nessus_24242",
+          "nessus_106658",
+          "nessus_66173",
+          "nessus_45411",
+          "nessus_45410",
+          "nessus_35291",
+          "nessus_51891",
+          "nessus_10658"
+        ]
+      },
+      {
+        "batch": 10,
+        "error": "{'message': \"Could not find the 'cve' column of 'vulnerabilities' in the schema cache\", 'code': 'PGRST204', 'hint': None, 'details': None}",
+        "items": [
+          "nessus_108454",
+          "nessus_11424",
+          "nessus_174933",
+          "nessus_26024",
+          "nessus_11153",
+          "nessus_84821",
+          "nessus_87242",
+          "nessus_50845",
+          "nessus_10719",
+          "nessus_42981"
+        ]
+      },
+      {
+        "batch": 11,
+        "error": "{'message': \"Could not find the 'cve' column of 'vulnerabilities' in the schema cache\", 'code': 'PGRST204', 'hint': None, 'details': None}",
+        "items": [
+          "nessus_83298",
+          "nessus_94761",
+          "nessus_138330",
+          "nessus_62564",
+          "nessus_35371",
+          "nessus_72779",
+          "nessus_11002",
+          "nessus_87733",
+          "nessus_62349",
+          "nessus_62351"
+        ]
+      },
+      {
+        "batch": 12,
+        "error": "{'message': \"Could not find the 'cve' column of 'vulnerabilities' in the schema cache\", 'code': 'PGRST204', 'hint': None, 'details': None}",
+        "items": [
+          "nessus_42149",
+          "nessus_10092",
+          "nessus_11414",
+          "nessus_54580",
+          "nessus_42088",
+          "nessus_10263",
+          "nessus_106375",
+          "nessus_10302",
+          "nessus_10386",
+          "nessus_10185"
+        ]
+      },
+      {
+        "batch": 13,
+        "error": "{'message': \"Could not find the 'cve' column of 'vulnerabilities' in the schema cache\", 'code': 'PGRST204', 'hint': None, 'details': None}",
+        "items": [
+          "nessus_42085",
+          "nessus_42087",
+          "nessus_35716",
+          "nessus_86420",
+          "nessus_241984",
+          "nessus_10674",
+          "nessus_48204",
+          "nessus_20175",
+          "nessus_69482",
+          "nessus_108761"
+        ]
+      },
+      {
+        "batch": 14,
+        "error": "{'message': \"Could not find the 'cve' column of 'vulnerabilities' in the schema cache\", 'code': 'PGRST204', 'hint': None, 'details': None}",
+        "items": [
+          "nessus_10144",
+          "nessus_235034",
+          "nessus_240060",
+          "nessus_249235",
+          "nessus_237498",
+          "nessus_271806",
+          "nessus_241680",
+          "nessus_271694",
+          "nessus_160894",
+          "nessus_162498"
+        ]
+      },
+      {
+        "batch": 15,
+        "error": "{'message': \"Could not find the 'cve' column of 'vulnerabilities' in the schema cache\", 'code': 'PGRST204', 'hint': None, 'details': None}",
+        "items": [
+          "nessus_166906",
+          "nessus_171657",
+          "nessus_173251",
+          "nessus_169459",
+          "nessus_180194",
+          "nessus_182809",
+          "nessus_201848",
+          "nessus_186365",
+          "nessus_192042",
+          "nessus_213078"
+        ]
+      },
+      {
+        "batch": 16,
+        "error": "{'message': \"Could not find the 'cve' column of 'vulnerabilities' in the schema cache\", 'code': 'PGRST204', 'hint': None, 'details': None}",
+        "items": [
+          "nessus_271691",
+          "nessus_232528",
+          "nessus_159464",
+          "nessus_100669",
+          "nessus_204826",
+          "nessus_12085",
+          "nessus_39446",
+          "nessus_90510",
+          "nessus_34460",
+          "nessus_73756"
+        ]
+      },
+      {
+        "batch": 17,
+        "error": "{'message': \"Could not find the 'cve' column of 'vulnerabilities' in the schema cache\", 'code': 'PGRST204', 'hint': None, 'details': None}",
+        "items": [
+          "nessus_69551",
+          "nessus_22319",
+          "nessus_39521",
+          "nessus_201425",
+          "nessus_84574",
+          "nessus_104887",
+          "nessus_60119",
+          "nessus_10395",
+          "nessus_17651",
+          "nessus_10859"
+        ]
+      },
+      {
+        "batch": 18,
+        "error": "{'message': \"Could not find the 'cve' column of 'vulnerabilities' in the schema cache\", 'code': 'PGRST204', 'hint': None, 'details': None}",
+        "items": [
+          "nessus_18261",
+          "nessus_57323",
+          "nessus_48243",
+          "nessus_11213",
+          "nessus_25240",
+          "nessus_11765",
+          "nessus_89058",
+          "nessus_10919",
+          "nessus_201456",
+          "nessus_134220"
+        ]
+      },
+      {
+        "batch": 19,
+        "error": "{'message': \"Could not find the 'cve' column of 'vulnerabilities' in the schema cache\", 'code': 'PGRST204', 'hint': None, 'details': None}",
+        "items": [
+          "nessus_269984",
+          "nessus_234554",
+          "nessus_159490",
+          "nessus_159491",
+          "nessus_187201",
+          "nessus_160218",
+          "nessus_11154",
+          "nessus_35297",
+          "nessus_43829",
+          "nessus_25701"
+        ]
+      },
+      {
+        "batch": 20,
+        "error": "{'message': \"Could not find the 'cve' column of 'vulnerabilities' in the schema cache\", 'code': 'PGRST204', 'hint': None, 'details': None}",
+        "items": [
+          "nessus_20870",
+          "nessus_91822",
+          "nessus_65914",
+          "nessus_150280",
+          "nessus_153584",
+          "nessus_156255",
+          "nessus_161454",
+          "nessus_158900",
+          "nessus_161948",
+          "nessus_193422"
+        ]
+      },
+      {
+        "batch": 21,
+        "error": "{'message': \"Could not find the 'cve' column of 'vulnerabilities' in the schema cache\", 'code': 'PGRST204', 'hint': None, 'details': None}",
+        "items": [
+          "nessus_193420",
+          "nessus_193421",
+          "nessus_193424",
+          "nessus_193423",
+          "nessus_172186",
+          "nessus_170113",
+          "nessus_183391",
+          "nessus_193419",
+          "nessus_192923",
+          "nessus_201198"
+        ]
+      },
+      {
+        "batch": 22,
+        "error": "{'message': \"Could not find the 'cve' column of 'vulnerabilities' in the schema cache\", 'code': 'PGRST204', 'hint': None, 'details': None}",
+        "items": [
+          "nessus_153585",
+          "nessus_153583",
+          "nessus_153586",
+          "nessus_85805",
+          "nessus_185519",
+          "nessus_91263",
+          "nessus_121471",
+          "nessus_175373",
+          "nessus_108804",
+          "nessus_108659"
+        ]
+      },
+      {
+        "batch": 23,
+        "error": "{'message': \"Could not find the 'cve' column of 'vulnerabilities' in the schema cache\", 'code': 'PGRST204', 'hint': None, 'details': None}",
+        "items": [
+          "nessus_14255",
+          "nessus_20094",
+          "nessus_14773",
+          "nessus_19689",
+          "nessus_35711",
+          "nessus_103869",
+          "nessus_142594",
+          "nessus_109553",
+          "nessus_91572",
+          "nessus_12218"
+        ]
+      },
+      {
+        "batch": 24,
+        "error": "{'message': \"Could not find the 'cve' column of 'vulnerabilities' in the schema cache\", 'code': 'PGRST204', 'hint': None, 'details': None}",
+        "items": [
+          "nessus_210450",
+          "nessus_162721",
+          "nessus_171079",
+          "nessus_173260",
+          "nessus_181288",
+          "nessus_178475",
+          "nessus_184811",
+          "nessus_192965",
+          "nessus_201084",
+          "nessus_209149"
+        ]
+      },
+      {
+        "batch": 25,
+        "error": "{'message': \"Could not find the 'cve' column of 'vulnerabilities' in the schema cache\", 'code': 'PGRST204', 'hint': None, 'details': None}",
+        "items": [
+          "nessus_266294",
+          "nessus_10663",
+          "nessus_90317",
+          "nessus_71049",
+          "nessus_29700",
+          "nessus_204972",
+          "nessus_12295",
+          "nessus_194915",
+          "nessus_20108",
+          "nessus_134862"
+        ]
+      },
+      {
+        "batch": 26,
+        "error": "{'message': \"Could not find the 'cve' column of 'vulnerabilities' in the schema cache\", 'code': 'PGRST204', 'hint': None, 'details': None}",
+        "items": [
+          "nessus_103699",
+          "nessus_176310",
+          "nessus_197822",
+          "nessus_124058",
+          "nessus_197856",
+          "nessus_126312",
+          "nessus_126245",
+          "nessus_161159",
+          "nessus_132419",
+          "nessus_133845"
+        ]
+      },
+      {
+        "batch": 27,
+        "error": "{'message': \"Could not find the 'cve' column of 'vulnerabilities' in the schema cache\", 'code': 'PGRST204', 'hint': None, 'details': None}",
+        "items": [
+          "nessus_197849",
+          "nessus_106713",
+          "nessus_138098",
+          "nessus_138591",
+          "nessus_141446",
+          "nessus_144050",
+          "nessus_194473",
+          "nessus_197830",
+          "nessus_147164",
+          "nessus_152182"
+        ]
+      },
+      {
+        "batch": 28,
+        "error": "{'message': \"Could not find the 'cve' column of 'vulnerabilities' in the schema cache\", 'code': 'PGRST204', 'hint': None, 'details': None}",
+        "items": [
+          "nessus_122447",
+          "nessus_118037",
+          "nessus_106978",
+          "nessus_21186",
+          "nessus_42822",
+          "nessus_90764",
+          "nessus_207864",
+          "nessus_11367",
+          "nessus_10043",
+          "nessus_10061"
+        ]
+      },
+      {
+        "batch": 29,
+        "error": "{'message': \"Could not find the 'cve' column of 'vulnerabilities' in the schema cache\", 'code': 'PGRST204', 'hint': None, 'details': None}",
+        "items": [
+          "nessus_10052",
+          "nessus_10198",
+          "nessus_17975"
+        ]
+      }
+    ]
+  },
+  "processed_at": "2026-01-21T16:22:30.141263"
+}
