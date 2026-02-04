@@ -26,6 +26,7 @@ XlsxWriter>=3.1.0
 # Async
 anyio>=4.0.0
 aiofiles>=23.0.0
+asyncpg>=0.29.0
 
 # Utilities
 structlog>=24.0.0
