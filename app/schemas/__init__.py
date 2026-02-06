@@ -84,6 +84,9 @@ from .findings import (
     FindingListResponse,
 )
 
+# Services
+from .services import ServiceResponse
+
 # Assets
 from .assets import (
     AssetBase,
@@ -178,6 +181,8 @@ __all__ = [
     "AssetCreate",
     "AssetUpdate",
     "AssetResponse",
+    # Services
+    "ServiceResponse",
     # Scans
     "ScanImportCreate",
     "ScanImportResponse",

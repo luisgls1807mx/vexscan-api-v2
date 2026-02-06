@@ -13,6 +13,7 @@ class DashboardSummary(BaseModel):
     open_findings: int = 0
     critical_findings: int = 0
     high_findings: int = 0
+    services_count: int = 0
     mitigated_this_month: int = 0
     avg_mttr_days: Optional[float] = None
 

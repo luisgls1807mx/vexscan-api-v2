@@ -60,5 +60,6 @@ class ProjectResponse(ProjectBase):
     medium_count: int = 0
     low_count: int = 0
     total_assets: int = 0
+    services_count: int = 0
     last_scan_at: Optional[datetime] = None
 

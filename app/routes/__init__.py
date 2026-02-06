@@ -22,6 +22,7 @@ from app.routes.notifications import router as notifications_router
 from app.routes.dashboard import router as dashboard_router
 from app.routes.ai_chat import router as ai_chat_router
 from app.routes.translations import router as translations_router
+from app.routes.services import router as services_router
 
 # Main router
 api_router = APIRouter()
@@ -35,6 +36,7 @@ api_router.include_router(roles_router)
 api_router.include_router(projects_router)
 api_router.include_router(teams_router)
 api_router.include_router(assets_router)
+api_router.include_router(services_router)
 api_router.include_router(findings_router)
 api_router.include_router(scans_router)
 api_router.include_router(scans_experimental_router)
