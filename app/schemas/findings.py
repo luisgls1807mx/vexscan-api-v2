@@ -80,6 +80,8 @@ class FindingResponse(BaseModel):
     folio: str
     title: str
     description: Optional[str] = None
+    title_es: Optional[str] = None
+    description_es: Optional[str] = None
     solution: Optional[str] = None
     location: Optional[str] = None
     
