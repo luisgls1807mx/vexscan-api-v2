@@ -83,6 +83,13 @@ class FindingResponse(BaseModel):
     title_es: Optional[str] = None
     description_es: Optional[str] = None
     solution: Optional[str] = None
+    solution_es: Optional[str] = None
+    synopsis: Optional[str] = None
+    synopsis_es: Optional[str] = None
+    plugin_family: Optional[str] = None
+    plugin_output: Optional[str] = None
+    plugin_output_es: Optional[str] = None
+    is_translated: bool = False
     location: Optional[str] = None
     
     severity: SeverityLevel
